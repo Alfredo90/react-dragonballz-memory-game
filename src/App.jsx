@@ -21,11 +21,21 @@ function App() {
   return (
     <div>
       <Navbar />
-      <div>
+      <div className="flex flex-wrap justify-center items-center">
         {data.items?.map((characters) => (
-          <li key={characters.id}>
-            <img src={characters.image} alt="warriors" />
-          </li>
+          <div
+            key={characters.id}
+            className="border-2 w-60 h-60 flex-col justify-center items-center"
+          >
+            <img
+              src={characters.image}
+              alt="warriors"
+              className=" h-32 w-32  "
+            />
+            <div>
+              <p>{characters.name}</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>
