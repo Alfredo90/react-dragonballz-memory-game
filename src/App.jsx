@@ -1,18 +1,34 @@
-import "./App.css";
-
 import Navbar from "./components/Navbar/Navbar";
-import { useState } from "react";
+import useAxiosData from "./useAxiosData";
+// import { useState } from "react";
 
 function App() {
-  const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
-  const [data, setData] = useState([]);
+  const { data, loading, error } = useAxiosData(
+    "https://dragonball-api.com/api/characters"
+  );
+
+  // const [score, setScore] = useState(0);
+  // const [bestScore, setBestScore] = useState(0);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
   return (
-    <>
+    <div>
       <Navbar />
-      <Main />
-    </>
+      <div>
+        {data.items?.map((characters) => (
+          <li key={characters.id}>
+            <img src={characters.image} alt="warriors" />
+          </li>
+        ))}
+      </div>
+    </div>
   );
 }
 
